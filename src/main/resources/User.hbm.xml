@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="data.User" table="USER">
+        <id  name="id" column="ID" type="int">
+            <generator class="increment"/>
+        </id>
+        <property name="email" column="EMAIL" type="string"/>
+        <property name="first_name" column="FNAME" type="string"/>
+        <property name="gender" column="GENDER" type="string"/>
+        <property name="last_name" column="LNAME" type="string" />
+    </class>
+</hibernate-mapping>
