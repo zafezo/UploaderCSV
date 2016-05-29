@@ -6,10 +6,12 @@
 package servlets;
 
 import data.ParserCSV;
+import data.Statistic;
 import data.User;
 import database.HibernateUtil;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -50,6 +52,16 @@ public class ImportDataServlet extends HttpServlet {
                     request.setAttribute("errors", e.getMessage());
                 }
                 request.setAttribute("count", users.size());
+
+                Date date=new Date();
+                String useragent=request.getHeader("User-Agent");
+
+                Statistic statistic=new Statistic();
+                statistic.setDate(date);
+                statistic.setInfo(useragent);
+                statistic.setQuantity(users.size());
+                HibernateUtil.addStatistic(statistic);
+
                
                //send response
                getServletContext().getRequestDispatcher("/done.jsp").forward(request, response);

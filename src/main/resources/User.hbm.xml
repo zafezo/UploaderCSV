@@ -10,4 +10,13 @@
         <property name="gender" column="GENDER" type="string"/>
         <property name="last_name" column="LNAME" type="string" />
     </class>
+
+    <class name="data.Statistic" table="STATISTIC">
+        <id name="id" column="ID" type="int">
+            <generator class="increment"/>
+        </id>
+        <property name="date" column="DATE" type="timestamp"/>
+        <property name="info" column="INFO" type="string"/>
+        <property name="quantity" column="quantity" type="int"/>
+    </class>
 </hibernate-mapping>

@@ -5,6 +5,7 @@
  */
 package database;
 
+import data.Statistic;
 import data.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,5 +74,77 @@ public class HibernateUtil {
             session.close();
         }
         return users;
+    }
+
+
+    public static void deleteUserById(int id){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tr = null;
+        try{
+            tr = session.beginTransaction();
+            Query query = session.createQuery("delete from User where id = :userid");
+            query.setParameter("userid", id);
+            query.executeUpdate();
+
+            System.out.println("deleted"+id);
+
+            tr.commit();
+        }catch (HibernateException e) {
+            if (tr!=null) tr.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+    }
+
+
+    public static void updateUserById(User user){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tr = null;
+        try{
+            tr = session.beginTransaction();
+            session.update(user);
+            tr.commit();
+        }catch (HibernateException e) {
+            if (tr!=null) tr.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+    }
+
+    public static void addStatistic(Statistic statistic){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tr = null;
+        try{
+            tr = session.beginTransaction();
+            session.save(statistic);
+            tr.commit();
+        }catch (HibernateException e) {
+            if (tr!=null) tr.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+    }
+
+
+    public static List<Statistic> getStatistics()
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Statistic> statistics=null;
+        Transaction tr = null;
+        try{
+            tr = session.beginTransaction();
+            Query query = session.createQuery("from Statistic ");
+            statistics =  query.list();
+            tr.commit();
+        }catch (HibernateException e) {
+            if (tr!=null) tr.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return statistics;
     }
 }

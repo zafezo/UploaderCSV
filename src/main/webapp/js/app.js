@@ -1,5 +1,9 @@
 
 $(document).ready(function(){
+
+
+
+
     $('#fileinput').change(function (){
             //Get file
             var file = this.files[0];            
@@ -22,4 +26,123 @@ $(document).ready(function(){
                }
             };
      });
+
+    $(".deletebutton").bind("click", (function(event) {
+
+        var buttonIndex=$(".deletebutton").index(this);// user ids //same order to database
+
+        var userId=$(".userid").eq(buttonIndex).text();
+
+        // var deleterow=$(".edituser");
+        //
+        // $(deleterow[buttonIndex]).deleteRow();
+
+
+
+        $.ajax({
+            url:"admincontr",
+            type:"GET",
+            dataType:'json',
+            data:{userid: userId}
+        });
+        $(this).closest( 'tr').remove();
+}));
+
+
+
+var updateid;
+    
+    $(".agree").bind("click", function (event) {
+
+        var firstname=$(".inpfirs").val();
+        alert(firstname);
+        var lastname=$(".inplast").val();
+        var email=$(".inpemail").val();
+        var gender=$(".gender").val();
+        
+        $.ajax({
+            url:"admincontr",
+            type:"GET",
+            dataType:'json',
+            data:{updateid: updateid , firstname:firstname, lastname:lastname, email:email, gender:gender}
+        });
+
+    })
+    
+        $(".editbutton").bind("click", (function(event) {
+            var buttonIndex=$(".editbutton").index(this);// user ids //same order to database
+
+            $('#modal1').openModal();
+
+            var useritem=$(".useritems").eq(buttonIndex);
+
+
+            var tdarray=$(useritem).find('td');
+
+            var editusertd=$(".edituser").find('td');
+
+
+            updateid=$(tdarray[0]).text();
+            $(".inputid").text(updateid);
+
+
+            var i;
+            for(i=1; i<tdarray.length-2; i++){
+                var elementTd=$(tdarray[i]);
+
+                var text=elementTd.text();
+                var temptd=$(editusertd[i]);
+                var inputvalue=$(temptd).find('input');
+
+                inputvalue.attr("placeholder", text);
+
+            }
+
+
+
+
+
+        }));
+
+
+    $(".cancel").bind("click", function () {
+        $('#modal1').closeModal();
+
+    })
+
+
+
+
+
+
+    // $(".confirmbutton").one("click", (function(event) {
+    //     var buttonIndex=$(".c").index(this);// user ids //same order to database
+    //
+    //     var useritem=$(".useritems").eq(buttonIndex);
+    //
+    //
+    //     var tdarray=$(useritem).find('td');
+    //
+    //     var userinfo=[];
+    //
+    //     var i;
+    //     for(i=1; i<tdarray.length-2; i++){
+    //         var elementTd=$(tdarray[i]);
+    //         var input=elementTd.find("input");
+    //         userinfo.push(input.val());
+    //     }
+    //
+    //     alert(userinfo);
+    //
+    //     var exept=$(tdarray[tdarray.length-1]);
+    //
+    //     var firstname=$(".firstname").eq(buttonIndex);
+    //
+    //     var last=$(".lastname").eq(buttonIndex);
+    //
+    //
+    //
+    // }));
+
+    
 });
