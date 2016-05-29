@@ -2,6 +2,8 @@
 $(document).ready(function(){
 
 
+var booladduser;
+    var updateid;
 
 
     $('#fileinput').change(function (){
@@ -50,28 +52,50 @@ $(document).ready(function(){
 
 
 
-var updateid;
+
     
     $(".agree").bind("click", function (event) {
 
         var firstname=$(".inpfirs").val();
-        alert(firstname);
         var lastname=$(".inplast").val();
         var email=$(".inpemail").val();
         var gender=$(".gender").val();
-        
-        $.ajax({
-            url:"admincontr",
-            type:"GET",
-            dataType:'json',
-            data:{updateid: updateid , firstname:firstname, lastname:lastname, email:email, gender:gender}
-        });
 
-    })
-    
+        if(booladduser) {
+            alert("fack add");
+                    $.ajax({  //add new user
+                url: "admincontr",
+                type: "GET",
+                dataType: 'json',
+                data: { firstname: firstname, lastname: lastname, email: email, gender: gender}
+            });
+        }
+        else{
+            alert("fack update");
+            $.ajax({ //update user
+                url: "admincontr",
+                type: "GET",
+                dataType: 'json',
+                data: {updateid: updateid, firstname: firstname, lastname: lastname, email: email, gender: gender}
+            });
+        }
+
+        setTimeout(window.location.reload(), 600);
+
+
+    });
+
+    $(".adduser").bind("click", (function(event) {
+        var buttonIndex = $(".editbutton").index(this);// user ids //same order to database
+        booladduser=true;
+
+        $('#modal1').openModal();
+
+    }));
+
         $(".editbutton").bind("click", (function(event) {
             var buttonIndex=$(".editbutton").index(this);// user ids //same order to database
-
+            booladduser=false;
             $('#modal1').openModal();
 
             var useritem=$(".useritems").eq(buttonIndex);

@@ -26,12 +26,12 @@
 
 
 <body>
-
-    <caption class="center-align"><a href="index.html" class="btn btn-preview blue darken-4  white-text ">Main Page</a><h1>You have in DataBase ${count} rows</h1></caption>
-
-
+<div align="center">
+    <caption align="center"><a href="index.html" class="btn btn-preview blue darken-4  white-text ">Main Page</a><h1>You have in DataBase ${count} rows</h1></caption>
 
 
+    <a href="#!" class="adduser modal-action modal-close waves-effect waves-green btn-flat left-align blue darken-4  white-text" >Add New User</a>
+</div>
     <!-- Modal Structure -->
     <div id="modal1" class="modal modal-fixed-footer">
         <div class="modal-content">
@@ -40,7 +40,7 @@
                 <table class="striped bordered card-panel">
                 <thead class="grey darken-4 white-text">
                 <tr>
-                    <th>ID</th>
+                    <th class="idth">ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
@@ -63,7 +63,7 @@
             </div>
         </div>
         <div class="modal-footer row">
-            <a href="#!" class="disagree modal-action modal-close waves-effect waves-green btn-flat left-align">Update</a>
+            <a href="#!" class="agree modal-action modal-close waves-effect waves-green btn-flat left-align">Agree</a>
             <a href="#!" class="cancel modal-action modal-close waves-effect waves-green btn-flat right-align">Cancel</a>
         </div>
     </div>

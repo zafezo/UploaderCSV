@@ -147,4 +147,22 @@ public class HibernateUtil {
         }
         return statistics;
     }
+
+    public static void addUser(User user){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Statistic> statistics=null;
+        Transaction tr = null;
+        try{
+            tr = session.beginTransaction();
+            session.save(user);
+            tr.commit();
+        }catch (HibernateException e) {
+            if (tr!=null) tr.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+
+    };
+
 }

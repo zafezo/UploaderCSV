@@ -44,5 +44,18 @@ public class AdminControllerServlet extends HttpServlet {
             HibernateUtil.updateUserById(updateUser);
 
         }
+        else
+        {
+            if(req.getParameter("firstname")!=null)
+            {
+                String firstname=req.getParameter("firstname") ;
+                String lastname= req.getParameter("lastname") ;
+                String email=    req.getParameter("email");
+                String gender=   req.getParameter("gender")  ;
+
+                User updateUser= UserASM.user.crateUser(firstname,lastname,email,gender);
+                HibernateUtil.addUser(updateUser);
+            }
+        }
     }
 }
