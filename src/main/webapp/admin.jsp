@@ -26,12 +26,17 @@
 
 
 <body>
-<div align="center">
-    <caption align="center"><a href="index.html" class="btn btn-preview blue darken-4  white-text ">Main Page</a><h1>You have in DataBase ${count} rows</h1></caption>
 
-
-    <a href="#!" class="adduser modal-action modal-close waves-effect waves-green btn-flat left-align blue darken-4  white-text" >Add New User</a>
-</div>
+<nav>
+    <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">UploaderCVS</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="index.html" class="btn btn-preview blue darken-4  white-text ">Main Page</a></li>
+            <li><a href="show" class="btn btn-preview blue darken-4  white-text">Preview</a></li>
+            <li><a href="/ulpoader-cvs/login" class="btn btn-preview blue darken-4  white-text ">Logout</a></li>
+        </ul>
+    </div>
+</nav>
     <!-- Modal Structure -->
     <div id="modal1" class="modal modal-fixed-footer">
         <div class="modal-content">

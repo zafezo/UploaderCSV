@@ -62,7 +62,6 @@ var booladduser;
         var gender=$(".gender").val();
 
         if(booladduser) {
-            alert("fack add");
                     $.ajax({  //add new user
                 url: "admincontr",
                 type: "GET",
@@ -71,7 +70,6 @@ var booladduser;
             });
         }
         else{
-            alert("fack update");
             $.ajax({ //update user
                 url: "admincontr",
                 type: "GET",
@@ -121,11 +119,6 @@ var booladduser;
                 inputvalue.attr("placeholder", text);
 
             }
-
-
-
-
-
         }));
 
 
@@ -133,40 +126,5 @@ var booladduser;
         $('#modal1').closeModal();
 
     })
-
-
-
-
-
-
-    // $(".confirmbutton").one("click", (function(event) {
-    //     var buttonIndex=$(".c").index(this);// user ids //same order to database
-    //
-    //     var useritem=$(".useritems").eq(buttonIndex);
-    //
-    //
-    //     var tdarray=$(useritem).find('td');
-    //
-    //     var userinfo=[];
-    //
-    //     var i;
-    //     for(i=1; i<tdarray.length-2; i++){
-    //         var elementTd=$(tdarray[i]);
-    //         var input=elementTd.find("input");
-    //         userinfo.push(input.val());
-    //     }
-    //
-    //     alert(userinfo);
-    //
-    //     var exept=$(tdarray[tdarray.length-1]);
-    //
-    //     var firstname=$(".firstname").eq(buttonIndex);
-    //
-    //     var last=$(".lastname").eq(buttonIndex);
-    //
-    //
-    //
-    // }));
-
     
 });

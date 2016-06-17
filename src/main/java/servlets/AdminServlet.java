@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,7 +20,12 @@ import java.util.List;
 public class AdminServlet extends HttpServlet{
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<User> users = null;
+        HttpSession session = request.getSession();
+
+        if (session.getAttribute("login") == null) {
+            getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+        } else {
+            List<User> users = null;
         try {
             users = HibernateUtil.findAllUsers();
         } catch (Exception e) {
@@ -29,14 +35,15 @@ public class AdminServlet extends HttpServlet{
 
 
         request.setAttribute("users", users);
-        request.setAttribute("count",users.size());
+        request.setAttribute("count", users.size());
 
 
-        List<Statistic> statistics=HibernateUtil.getStatistics();
+        List<Statistic> statistics = HibernateUtil.getStatistics();
 
         request.setAttribute("statistics", statistics);
 
         //send response
         getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
+    }
     }
 }
